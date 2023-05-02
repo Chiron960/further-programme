@@ -27,8 +27,8 @@ def is_valid(board, row, col, num):
             return False
     square_row = (row // 3) * 2
     square_col = (col // 3) * 2 
-    for x in range(square_row, square_row + 3):
-        for y in range(square_col, square_col + 3): 
+    for y in range(square_row, square_row + 3):
+        for x in range(square_col, square_col + 3): 
             if board[x][y] == num:
                 return False
     return True
