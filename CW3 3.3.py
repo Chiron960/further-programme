@@ -9,11 +9,7 @@ def initial_board(board):
     for x in range(9):
         for y in range(9):
             print(board[x][y], end=' ')
-            if y == 2 or y == 5:
-                print(' ', end=' ')
         print()
-        if x == 2 or x == 5:
-            print(' '*21)
 
 def find_empty(board):
     for x in range(9):
