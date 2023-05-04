@@ -46,6 +46,7 @@ def solve_recursive(board, depth):
     if not empty_part:
         return True
     row, col = empty_part
+#Returns True if a solution was found, and the original array is modified to display the answer.
     for num in range(1,7):
         if is_valid(board, row, col, num):
             board[row][col]=num
