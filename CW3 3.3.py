@@ -11,6 +11,7 @@ def initial_board(board):
             print(board[x][y], end=' ')
         print()
 
+#Find the location of a space in a sudoku and return its coordinates        
 def find_empty(board):
     for x in range(9):
         for y in range(9):
