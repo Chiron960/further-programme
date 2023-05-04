@@ -35,6 +35,7 @@ def is_valid(board, row, col, num):
                 return False
     return True
 
+#Sudoku solver. By recursively calling the function solve_board(), the function will try to fill in the blanks with numbers and check for collisions.
 def solve_board(board):
     empty_part = find_empty(board)
     if not empty_part:
@@ -43,6 +44,7 @@ def solve_board(board):
     for num in range(1,5):
         if is_valid(board, row, col, num):
             board[row][col]=num
+#Returns True if a solution was found, and the original array is modified to display the answer.
             if solve_board(board):
                 return True
             board[row][col]=0
