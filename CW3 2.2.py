@@ -19,7 +19,7 @@ def find_empty(board):
             if board[x][y] == 0:
                 return (x,y)
     return None
-
+#Finds the location of a space in Sudoku and returns its coordinates Checks if a given number has already occurred in a row, column, and house. The function will return True if the number is not repeated in any row, column or house
 def is_valid(board, row, col, num):
     for y in range(4):
         if board[row][y] == num:
