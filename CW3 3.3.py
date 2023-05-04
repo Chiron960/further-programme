@@ -4,7 +4,7 @@ Created on Tue Apr 25 17:32:31 2023
 
 @author: zyx34
 """
-
+#Outputs an array of initial sudoku so the user can see the state of the sudoku
 def initial_board(board):
     for x in range(9):
         for y in range(9):
