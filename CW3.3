@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May  2 11:24:16 2023
+
+@author: zyx34
+"""
+
+import numpy as np
+
+# Define the wavefront propagation function
+def wavefront_propagation(board):
+    while True:
+        changed = False
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != 0:
+                    continue
+                possible_values = set(range(1, 10))
+                # Check row and column
+                for k in range(9):
+                    possible_values.discard(board[i][k])
+                    possible_values.discard(board[k][j])
+                # Check subgrid
+                subgrid_i = (i // 3) * 3
+                subgrid_j = (j // 3) * 3
+                for k in range(3):
+                    for l in range(3):
+                        possible_values.discard(board[subgrid_i + k][subgrid_j + l])
+                if len(possible_values) == 1:
+                    board[i][j] = possible_values.pop()
+                    changed = True
+        if not changed:
+            break
+
+# Define the Sudoku solver function
+def solve_sudoku(board):
+    wavefront_propagation(board)
+    # Check if board is solved
+    if np.count_nonzero(board == 0) == 0:
+        return board
+    # Try all possible values for the first empty cell and recurse
+    i, j = np.argwhere(board == 0)[0]
+    for value in range(1, 10):
+        board_copy = board.copy()
+        board_copy[i][j] = value
+        try:
+            solution = solve_sudoku(board_copy)
+            if solution is not None:
+                return solution
+        except:
+            continue
+    return None
+
+board = [
+    [0, 0, 0, 2, 6, 0, 7, 0, 1],
+    [6, 8, 0, 0, 7, 0, 0, 9, 0],
+    [1, 9, 0, 0, 0, 4, 5, 0, 0],
+    [8, 2, 0, 1, 0, 0, 0, 4, 0],
+    [0, 0, 4, 6, 0, 2, 9, 0, 0],
+    [0, 5, 0, 0, 0, 3, 0, 2, 8],
+    [0, 0, 9, 3, 0, 0, 0, 7, 4],
+    [0, 4, 0, 0, 5, 0, 0, 3, 6],
+    [7, 0, 3, 0, 1, 8, 0, 0, 0]
+    ]
+
+print("begging_board:")
+wavefront_propagation(board)
+
+solve_sudoku(board)
+print("\n")
+
+print("end_board:")
+wavefront_propagation(board)
